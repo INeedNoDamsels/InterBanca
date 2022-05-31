@@ -8,6 +8,6 @@ Proyecto Grupal
 # UNRN Andina - Introducción a la Ingenieria en Computación
 ################
 
-from misc.menu  import opciones, operacion
+from misc.menu import opciones
 
 opciones()
