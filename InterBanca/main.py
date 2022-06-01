@@ -1,5 +1,5 @@
 """
-Proyecto Grupal
+Programa ppal.
 """
 
 ################
@@ -8,6 +8,9 @@ Proyecto Grupal
 # UNRN Andina - Introducción a la Ingenieria en Computación
 ################
 
-from misc.menu import opciones
+def principal():
+    from src.menu import opciones
+    opciones()
 
-opciones()
+if __name__ == "__main__":
+    principal()
