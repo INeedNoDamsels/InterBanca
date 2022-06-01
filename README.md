@@ -1,7 +1,9 @@
-# Trabajo Integrador Final
-## :lock: repo privado
+# Trabajo Integrador Final :lock:
 * :file_folder: **InterBanca**
-    * main.py :arrow_right: _Programa ppal._
-    * :file_folder: **misc**
-        * ASCII.py :arrow_right: _Encabezado del "software"._
-        * menu.py :arrow_right: _Menú de opciones._
+    * main.py -> _Programa principal_ ***(ejecutar este)***.
+    * :file_folder: **src**
+        * menu.py -> _Menú de opciones._
+        * operaciones.py -> _Operaciones._
+        * :file_folder: **misc**
+            * ascii.py -> _Encabezado._
+            * globales.py -> _Variables globales y funciones útiles._
