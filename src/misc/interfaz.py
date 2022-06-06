@@ -1,19 +1,29 @@
 """
 Interfaces y demás extras para simular realismo.
 """
-import os
-from .globales import lapso
-from menu      import inicio
+from os import system, name
+try:
+    from .globales import lapso
+    from menu      import inicio
+except ImportError:
+    from src.misc.globales import lapso
+    from src.menu          import inicio
 
 def nombre_operacion(posicion):
+    """
+    Función que imprime el nombre correspondiente a cada operación.
+    """
     nombres = ("[  CONSULTAS  ]", "[   RETIROS   ]", "[TRANSFERENCIA]", "[FINALIZANDO]")
     print(f"\n\t\t\t       {nombres[posicion]}\n")
 
 def head():
     """
-    Función que imprime ese interfaz tan querido por la comunidad bancaria Peruana-Argentina.
+    Función que limpia la pantalla e imprime ese interfaz tan querido por la comunidad bancaria Peruana-Argentina.
     """
-    os.system('cls')
+    if name == "nt":      # para Windows
+        _ = system("cls")
+    elif name == "posix": # para Mac / Linux
+        _ = system("clear")
 
     print("\n _  _    _  _______  ______  _____    _____    ____   _    _    ____   ____ \
     \n| || \\  | ||__   __||  ____||  __ \\  |  __ \\  / __ \\ | \\  | |  / ___| / __ \\ \

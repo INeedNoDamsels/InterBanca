@@ -1,11 +1,16 @@
 """
 Operaciones disponibles del ATM.
 """
-import menu
-import misc.interfaz
-from misc.globales import tipo_cambio, lapso
+try:
+    import menu
+    import misc.interfaz
+    from   misc.globales import tipo_cambio, lapso
+except ImportError:
+    import src.menu
+    import src.misc.interfaz
+    from misc.globales import tipo_cambio, lapso
 
-def consulta(): # Ambos.
+def consulta():
     """
     Función que permite la consulta de saldo en la cuenta.
     """

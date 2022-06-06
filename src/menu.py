@@ -1,9 +1,14 @@
 """
 Inicialización del ATM y menú de opciones.
 """
-import misc.interfaz
-import misc.globales
-import operaciones
+try:
+    import misc.interfaz
+    import misc.globales
+    import operaciones
+except ImportError:
+    import src.misc.interfaz
+    import src.misc.globales
+    import src.operaciones
 
 def inicio(intentos):
     """
@@ -41,7 +46,7 @@ def opciones():
     except:
         opciones()
 
-def operacion(opcion): # Agregar condicional y llamar función correspondiente.
+def operacion(opcion):
     """
     Función que determina la operación ingresada y llama la función correspondiente.
     """
