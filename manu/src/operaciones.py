@@ -7,58 +7,69 @@ from misc.globales import tipo_cambio, lapso
 
 def consulta(): # Ambos.
     """
+    Función que permite la consulta de saldo en la cuenta.
     """
     misc.interfaz.head()
 
-    opcion = int(input("\n\t\t\t\t[  CONSULTAS  ]\n\n \
-\t\t     <1> Posición global <2> Movimientos\n\t\t\t\t  <3> Salir \
+    misc.interfaz.nombre_operacion(0)
+    opcion = int(input("\t\t     <1> Posición global <2> Movimientos\n\t\t\t\t  <3> Salir \
 \n >> Ingrese operación: "))
 
     if opcion == 1:
-        tipo_cambio()
-        print(f"\n\t\t Saldo disponible: ${misc.globales.saldo} {misc.globales.moneda}")
+        misc.globales.tipo_cambio()
+        misc.interfaz.head()
+        misc.interfaz.nombre_operacion(0)
+        print(f"\t\t\tSaldo disponible: ${misc.globales.saldo} {misc.globales.moneda}")
+        misc.interfaz.continuar()
+    elif opcion == 2:
+        pass # Movimientos
+    else:
+        menu.opciones()
 
-    lapso(3)
     menu.opciones()
 
 def retiro(): # Agus.
     """
+    Función que permite el retiro de dinero.
     """
-    pass
+    misc.interfaz.head()
 
-def transferencia(): # Manu.
+    misc.interfaz.nombre_operacion(1)
+
+def transferencia():
     """
     Función que permite la transferencia de dinero de una cuente a otra.
     """
     misc.interfaz.head()
 
-    numero = int(input("\n\t\t\t\t[TRANSFERENCIA]\n\n \
->> Ingrese número de cuenta destino: "))
+    misc.interfaz.nombre_operacion(2)
+    numero = int(input(" >> Ingrese número de cuenta destino: "))
 
     try:
         assert numero == misc.globales.clave_b
         tipo_cambio()
-        monto = float(input(f"\n >> Ingrese monto: $"))
-        if misc.globales.moneda == "PER":
-            monto = misc.globales.conversor(monto)
 
+        monto = float(input("\n >> Ingrese monto: $"))
         try:
-            assert monto <= misc.globales.saldo
-            misc.interfaz.head()
-
-            if misc.globales.moneda == "PER":
-                monto -= conversor(misc.globales.saldo_ar)
+            assert 0 < monto <= misc.globales.saldo
+            if misc.globales.moneda == "ARS":
+                misc.globales.dinero -= monto
             else:
-                monto -= misc.globales.saldo_ar
-            print("\n\t\t\t      Operación exitosa")
-        except:
-            print("\n\t\t\t     Saldo insuficiente")
+                misc.globales.dinero -= misc.globales.conversor_a_ars(monto)
 
+            misc.interfaz.head()
+            misc.interfaz.nombre_operacion(2)
+            print("\t\t\t       Operación exitosa")
+        except:
+            misc.interfaz.head()
+            misc.interfaz.nombre_operacion(2)
+            print("\t\t\t      Saldo insuficiente")
     except:
         misc.interfaz.head()
-        print("\n\t\t\t     Cuenta inexistente")
+        misc.interfaz.nombre_operacion(2)
+        print("\t\t\t      Cuenta inexistente")
 
-    lapso(5)
+    lapso(3)
     menu.opciones()
 
 def salir():
@@ -67,6 +78,7 @@ def salir():
     """
     misc.interfaz.head()
 
+    misc.interfaz.nombre_operacion(3)
     print("\n\t\t\t   Expulsando tarjeta")
     lapso(3)
 

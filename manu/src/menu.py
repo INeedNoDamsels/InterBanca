@@ -3,7 +3,7 @@ Inicialización del ATM y menú de opciones.
 """
 import misc.interfaz
 import misc.globales
-from operaciones import *
+import operaciones
 
 def inicio(intentos):
     """
@@ -11,10 +11,10 @@ def inicio(intentos):
     """
     misc.interfaz.head()
 
-    clave = int(input("\n>> Ingrese la clave de seguridad : "))
-    docu  = int(input(">> Ingrese su número de documento: "))
+    clave     = int(input("\n>> Ingrese la clave de seguridad : "))
+    documento = int(input(">> Ingrese su número de documento: "))
     try:
-        assert (clave == misc.globales.clave_a) and (docu == misc.globales.dni)
+        assert (clave == misc.globales.clave_a) and (documento == misc.globales.dni)
         opciones()
     except:
         intentos += 1
@@ -25,7 +25,7 @@ def inicio(intentos):
         else:
             inicio(intentos)
 
-def opciones(): # Aca no hace falta agregar nada ;)
+def opciones():
     """
     Función que imprime las opciones disponibles.
     """
@@ -48,10 +48,10 @@ def operacion(opcion): # Agregar condicional y llamar función correspondiente.
     misc.interfaz.head()
 
     if opcion == 1:
-        consulta()
+        operaciones.consulta()
     elif opcion == 2:
-        retiro()
+        operaciones.retiro()
     elif opcion == 3:
-        transferencia()
+        operaciones.transferencia()
     else:
-        salir()
+        operaciones.salir()

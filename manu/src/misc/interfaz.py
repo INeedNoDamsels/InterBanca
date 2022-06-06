@@ -1,10 +1,13 @@
 """
-Encabezado del software.
+Interfaces y demás extras para simular realismo.
 """
-
 import os
-from menu import inicio
 from .globales import lapso
+from menu      import inicio
+
+def nombre_operacion(posicion):
+    nombres = ("[  CONSULTAS  ]", "[   RETIROS   ]", "[TRANSFERENCIA]", "[FINALIZANDO]")
+    print(f"\n\t\t\t\t{nombres[posicion]}\n")
 
 def head():
     """
@@ -26,7 +29,7 @@ def activacion():
     Función que simula la inicialización del ATM, el ingreso y lectura de la tarjeta.
     """
     head()
-    input("\n\t\t\tPresione Enter para continuar ")
+    continuar()
 
     head()
     print("\n\t\t       Ingrese la tarjeta en la ranura")
@@ -38,10 +41,17 @@ def activacion():
 
     inicio(0)
 
+def continuar():
+    """
+    Función que solicita al usuario interacción con el ATM para continuar su ejecución.
+    """
+    input("\n\t\t\tPresione Enter para continuar ")
+
 def final(mensaje):
     """
-    Función que finaliza la ejecución del programa, producida lo que especifica en el mensaje.
+    Función que cierra la sesión actual, producida lo que especifica en el mensaje.
     """
     head()
     print(mensaje)
     lapso(5)
+    activacion()
