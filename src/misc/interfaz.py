@@ -43,11 +43,11 @@ def activacion():
 
     head()
     print("\n\t\t       Ingrese la tarjeta en la ranura")
-    lapso(3)
+    lapso(2)
 
     head()
     print("\n\t\t\t     Leyendo tarjeta")
-    lapso(3)
+    lapso(2)
 
     inicio(0)
 

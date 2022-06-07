@@ -33,14 +33,77 @@ def consulta():
 
     menu.opciones()
 
-def retiro(): # Agus.
+def retiro():
     """
     Función que permite el retiro de dinero.
     """
     misc.interfaz.head()
 
     misc.interfaz.nombre_operacion(1)
+    
+      
+    tipo_cambio()
+    retirar=int(input('Ingrese el monto a retirar'))    
+    try:
+        assert 0<retirar<misc.globales.saldo
+        cuenta=int(input('Ingrese la cuenta a debitar'))
+        try:
+            assert cuenta==misc.globales.cta_debitar
+            valor=False
+            cont2=0 
+            while valor==False:
+                clave=int(input('Ingrese su clave nuevamente'))
+                if clave==misc.globales.clave_a:
+                    misc.globales.dinero -= retirar 
+                    preg2=int(input('Desea imprimir el voucher? <1> Si <2> No\n -->'))
+                    if preg2==1:
+                        print ('Imprimiendo')
+                        lapso(2)
+                        menu.opciones()
+                    print('Realizado')
+                    lapso(2)
+                    menu.opciones()
+                else:
+                    if cont2<=1:
+                        print ('Intente de nuevo:')
+                        cont2+=1
+                        valor=False
+                    else:
+                        print('Se agotaron los intentos')
+                        lapso(1)
+                        menu.opciones()
+                        
+        except :
+            misc.interfaz.head()
+            misc.interfaz.nombre_operacion(1)
+            print("\t\t\t     Cuenta inexistente")
+            
 
+    except:
+        cont=1
+        misc.interfaz.head()
+        misc.interfaz.nombre_operacion(1)
+        print("\t\t\t     Fondos insuficientes")
+        print('Desea modificar el saldo? <1> Si <2> Salir\n Tiene solo un intento')
+        preg=int(input('-->'))
+        try:
+            assert cont==misc.globales.intento
+            if preg==1:
+                misc.globales.intento+=1
+                retiro()
+            else:
+                print ('Hasta pronto')
+                lapso(1)
+                menu.opciones()
+        except:
+            print('Se agotaron los intentos')
+            lapso(1)
+            misc.globales.intento-=1
+            salir()
+        
+    lapso(2)
+    menu.opciones()       
+                            
 def transferencia():
     """
     Función que permite la transferencia de dinero de una cuente a otra.

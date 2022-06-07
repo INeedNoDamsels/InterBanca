@@ -2,13 +2,13 @@
 Funciones útiles y variables globales.
 """
 from time import sleep
-
+intento=1
 dinero  = 85000 # única variable que puede cambiar durante la ejecución del programa.
 clave_a = 12345
 clave_b = 98765
 dni     = 12345678
 sol     = 0.0419294118
-
+cta_debitar=55667
 def lapso(segundos):
     """
     Función que simula la realización de algunas tareas internas del ATM, para agregar "realismo".
@@ -23,7 +23,7 @@ def tipo_cambio():
     global moneda
     global saldo
 
-    opcion = (int(input(" >> Ingrese tipo de moneda (<1> ARS, <2> PER): ")))
+    opcion = int(input(" >> Ingrese tipo de moneda (<1> ARS, <2> PER): "))
     if opcion == 1:
         moneda = "ARS"
         saldo  = round(dinero, 2)
