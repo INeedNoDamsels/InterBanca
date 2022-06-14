@@ -2,58 +2,54 @@
 Inicialización del ATM y menú de opciones.
 """
 try:
-    import misc.interfaz
-    import misc.globales
+    import main
     import operaciones
+    import misc.globales
 except ImportError:
-    import src.misc.interfaz
-    import src.misc.globales
+    import src.main
     import src.operaciones
+    import src.misc.globales
 
-def inicio(intentos):
+def validar_datos(dato, almacenado):
     """
-    Función que solicita el ingreso de la clave de seguridad.
+    Función que valida el dato recibido con su contraparte almacenada.
     """
-    misc.interfaz.head()
+    dato_validado = bool(dato == almacenado)
 
-    clave     = int(input("\n>> Ingrese la clave de seguridad : "))
-    documento = int(input(">> Ingrese su número de documento: "))
-    if (clave == misc.globales.clave_a) and (documento == misc.globales.dni):
-        opciones()
-    else:
-        intentos += 1
+    return dato_validado
 
-        if intentos == 3:
-            misc.interfaz.final(1)
-        else:
-            inicio(intentos)
-
-def opciones():
+def inicio(clave, documento):
     """
-    Función que imprime las opciones disponibles.
+    Función que verifica la clave de seguridad y documento del usuario.
     """
-    misc.interfaz.head()
+    usuario_validado = bool((clave == misc.globales.clave_a) and (documento == misc.globales.dni))
 
-    opcion = int(input("\n\t\t\t\t Bienvenido \
-\n\n\t\t <1> Consultas <2> Retiros <3> Transferencia\n\t\t\t\t  <4> Salir \
-\n >> Ingrese operación: "))
-
-    if 0 < opcion < 5:
-        operacion(opcion)
-    else:
-        opciones()
+    return usuario_validado
 
 def operacion(opcion):
     """
-    Función que determina la operación ingresada y llama la función correspondiente.
+    Función que redirige al usuario a la operacion deseada.
     """
-    misc.interfaz.head()
+    if opcion != 4:
+        tipo_moneda = main.ingreso_valor(1, 2, 0, ">> Ingrese tipo de moneda (<1> ARS, <2> PER): ")
+        misc.globales.tipo_cambio(tipo_moneda)
 
     if opcion == 1:
-        operaciones.consulta()
+        operaciones.consulta(1)
     elif opcion == 2:
-        operaciones.retiro()
+        codigo = operaciones.retiro()
     elif opcion == 3:
-        operaciones.transferencia(0)
+        clave = main.ingreso_valor(0, 99999, 5, ">> Ingrese el número de cuenta destino: ")
+        monto = main.ingreso_valor(100, 85000, 5, ">> Ingrese el monto para transferir: $")
+
+        codigo = operaciones.transferencia(clave, monto)
     else:
         operaciones.salir()
+
+    if codigo == 0:
+        print("\t\t\t      Operación exitosa")
+    else:
+        print("\t\t\t      Operación fallida")
+
+    misc.globales.lapso()
+    main.opciones()
