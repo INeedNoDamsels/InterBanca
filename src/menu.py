@@ -41,7 +41,7 @@ def opciones():
 \n >> Ingrese operación: "))
 
     try:
-        assert 0 < opcion < 5
+        assert -1 < opcion < 5
         operacion(opcion)
     except:
         opciones()
@@ -52,11 +52,13 @@ def operacion(opcion):
     """
     misc.interfaz.head()
 
-    if opcion == 1:
+    if opcion == 0:
+        operaciones.configuracion()
+    elif opcion == 1:
         operaciones.consulta()
     elif opcion == 2:
         operaciones.retiro()
     elif opcion == 3:
-        operaciones.transferencia()
+        operaciones.transferencia(0)
     else:
         operaciones.salir()

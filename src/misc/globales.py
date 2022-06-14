@@ -2,18 +2,25 @@
 Funciones útiles y variables globales.
 """
 from time import sleep
-intento=1
+
+tiempos = True  #
 dinero  = 85000 # única variable que puede cambiar durante la ejecución del programa.
 clave_a = 12345
 clave_b = 98765
 dni     = 12345678
 sol     = 0.0419294118
-cta_debitar=55667
+
+intento     = 1     #
+cta_debitar = 55667 #
+
 def lapso(segundos):
     """
     Función que simula la realización de algunas tareas internas del ATM, para agregar "realismo".
     """
-    for i in range(segundos): # ¡ Cambiar 'segundos' por '0' para mayor rapidez !
+    if tiempos is not True:
+        segundos = 0
+
+    for _ in range(segundos):
         sleep(1)
 
 def tipo_cambio():

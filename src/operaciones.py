@@ -10,20 +10,38 @@ except ImportError:
     import src.misc.interfaz
     from misc.globales import tipo_cambio, lapso
 
+def configuracion():
+    """
+    Función que habilita o deshabilita el paso del tiempo al ejecutar ciertas operaciones.
+    """
+    misc.interfaz.head()
+    misc.interfaz.nombre_operacion(0)
+
+    opcion = input("¿Habilitar acciones con tiempo? (s/n): ")
+    if opcion in ("s", "S"):
+        misc.globales.tiempos = True
+    elif opcion in ("n", "N"):
+        misc.globales.tiempos = False
+    else:
+        configuracion()
+
+    menu.opciones()
+
 def consulta():
     """
     Función que permite la consulta de saldo en la cuenta.
     """
     misc.interfaz.head()
+    misc.interfaz.nombre_operacion(1)
 
-    misc.interfaz.nombre_operacion(0)
     opcion = int(input("\t\t     <1> Posición global <2> Movimientos\n\t\t\t\t  <3> Salir \
 \n >> Ingrese operación: "))
-
     if opcion == 1:
         misc.globales.tipo_cambio()
+
         misc.interfaz.head()
-        misc.interfaz.nombre_operacion(0)
+        misc.interfaz.nombre_operacion(1)
+
         print(f"\t\t\tSaldo disponible: ${misc.globales.saldo} {misc.globales.moneda}")
         misc.interfaz.continuar()
     elif opcion == 2:
@@ -40,21 +58,20 @@ def retiro():
     misc.interfaz.head()
 
     misc.interfaz.nombre_operacion(1)
-    
-      
+
     tipo_cambio()
-    retirar=int(input('Ingrese el monto a retirar'))    
+    retirar=int(input('Ingrese el monto a retirar'))
     try:
         assert 0<retirar<misc.globales.saldo
         cuenta=int(input('Ingrese la cuenta a debitar'))
         try:
             assert cuenta==misc.globales.cta_debitar
             valor=False
-            cont2=0 
-            while valor==False:
+            cont2=0
+            while valor==False: # while valor is False
                 clave=int(input('Ingrese su clave nuevamente'))
                 if clave==misc.globales.clave_a:
-                    misc.globales.dinero -= retirar 
+                    misc.globales.dinero -= retirar
                     preg2=int(input('Desea imprimir el voucher? <1> Si <2> No\n -->'))
                     if preg2==1:
                         print ('Imprimiendo')
@@ -72,13 +89,10 @@ def retiro():
                         print('Se agotaron los intentos')
                         lapso(1)
                         menu.opciones()
-                        
         except :
             misc.interfaz.head()
             misc.interfaz.nombre_operacion(1)
             print("\t\t\t     Cuenta inexistente")
-            
-
     except:
         cont=1
         misc.interfaz.head()
@@ -100,44 +114,54 @@ def retiro():
             lapso(1)
             misc.globales.intento-=1
             salir()
-        
+
     lapso(2)
-    menu.opciones()       
-                            
-def transferencia():
+    menu.opciones()
+
+def transferencia(intentos):
     """
     Función que permite la transferencia de dinero de una cuente a otra.
     """
     misc.interfaz.head()
+    misc.interfaz.nombre_operacion(3)
 
-    misc.interfaz.nombre_operacion(2)
-    numero = int(input(" >> Ingrese número de cuenta destino: "))
-
+    clave = int(input(" >> Ingrese la clave de seguridad: "))
     try:
-        assert numero == misc.globales.clave_b
-        tipo_cambio()
-
-        monto = float(input("\n >> Ingrese monto: $"))
+        assert clave == misc.globales.clave_a
+        numero = int(input(" >> Ingrese número de cuenta destino: "))
         try:
-            assert 0 < monto <= misc.globales.saldo
-            if misc.globales.moneda == "ARS":
-                misc.globales.dinero -= monto
-            else:
-                misc.globales.dinero -= misc.globales.conversor_a_ars(monto)
+            assert numero == misc.globales.clave_b
+            tipo_cambio()
 
-            misc.interfaz.head()
-            misc.interfaz.nombre_operacion(2)
-            print("\t\t\t      Operación exitosa")
+            monto = float(input("\n >> Ingrese monto: $"))
+            try:
+                assert 0 < monto <= misc.globales.saldo
+                if misc.globales.moneda == "ARS":
+                    misc.globales.dinero -= monto
+                else:
+                    misc.globales.dinero -= misc.globales.conversor_a_ars(monto)
+
+                misc.interfaz.head()
+                misc.interfaz.nombre_operacion(3)
+                print("\t\t\t      Operación exitosa")
+
+            except:
+                misc.interfaz.head()
+                misc.interfaz.nombre_operacion(3)
+                print("\t\t\t     Saldo insuficiente")
         except:
             misc.interfaz.head()
-            misc.interfaz.nombre_operacion(2)
-            print("\t\t\t     Saldo insuficiente")
+            misc.interfaz.nombre_operacion(3)
+            print("\t\t\t     Cuenta inexistente")
     except:
-        misc.interfaz.head()
-        misc.interfaz.nombre_operacion(2)
-        print("\t\t\t     Cuenta inexistente")
+        intentos += 1
 
-    lapso(3)
+        if intentos == 3:
+            misc.interfaz.final(1)
+        else:
+            transferencia(intentos)
+
+    lapso(2)
     menu.opciones()
 
 def salir():
@@ -145,10 +169,9 @@ def salir():
     Función que permite la salida voluntaria del usuario.
     """
     misc.interfaz.head()
+    misc.interfaz.nombre_operacion(4)
 
-    misc.interfaz.nombre_operacion(3)
     print("\t\t\t     Expulsando tarjeta")
-    lapso(3)
+    lapso(2)
 
-    misc.interfaz.final("\n\t\t\t      Guarde su tarjeta \
-\n\t\t     Gracias por confiar en InterBanca ©")
+    misc.interfaz.final(0)

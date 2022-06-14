@@ -13,7 +13,7 @@ def nombre_operacion(posicion):
     """
     Función que imprime el nombre correspondiente a cada operación.
     """
-    nombres = ("[  CONSULTAS  ]", "[   RETIROS   ]", "[TRANSFERENCIA]", "[FINALIZANDO]")
+    nombres = ("[CONFIGURACIÓN]", "[  CONSULTAS  ]", "[   RETIROS   ]", "[TRANSFERENCIA]", "[FINALIZANDO]")
     print(f"\n\t\t\t       {nombres[posicion]}\n")
 
 def head():
@@ -57,11 +57,16 @@ def continuar():
     """
     input("\n\t\t\tPresione Enter para continuar ")
 
-def final(mensaje):
+def final(nro_mensaje):
     """
     Función que cierra la sesión actual, producida lo que especifica en el mensaje.
     """
+    mensajes = ("\n\t\t\t      Guarde su tarjeta \
+\n\t\t     Gracias por confiar en InterBanca ©",
+                "\n\t       Demasiados intentos fallidos, tarjeta retenida \
+\n\t  Para más información, contacte a su proveedor de tarjetas")
+
     head()
-    print(mensaje)
-    lapso(5)
+    print(mensajes[nro_mensaje])
+    lapso(3)
     activacion()
