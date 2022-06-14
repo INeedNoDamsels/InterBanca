@@ -12,37 +12,33 @@ clave_b = 98765
 dni     = 12345678
 sol     = 0.0419294118
 
-intentos    = 1
-cta_debitar = 55667
-
 # pylint: enable-msg=C0103
 
-def lapso(segundos):
+def lapso():
     """
     Función que simula la realización de algunas tareas internas del ATM, para agregar "realismo".
     """
-    if tiempos is not True:
+    segundos = 2
+
+    if tiempos is False:
         segundos = 0
 
     for _ in range(segundos):
         sleep(1)
 
-def tipo_cambio():
+def tipo_cambio(opcion):
     """
     Función que determina el monto y moneda de referencia que utilizará el programa.
     """
     global moneda
     global saldo
 
-    opcion = int(input(" >> Ingrese tipo de moneda (<1> ARS, <2> PER): "))
     if opcion == 1:
         moneda = "ARS"
         saldo  = round(dinero, 2)
-    elif opcion == 2:
+    else:
         moneda = "PER"
         saldo  = conversor_a_per(dinero)
-    else:
-        tipo_cambio()
 
 def conversor_a_per(valor):
     """

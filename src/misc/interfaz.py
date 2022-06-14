@@ -3,22 +3,22 @@ Interfaces y demás extras para simular realismo.
 """
 from os import system, name
 try:
-    from menu          import inicio
-    from operaciones   import configuracion
+    import main
     from misc.globales import lapso
+    from operaciones   import configuracion
 except ImportError:
-    from src.menu          import inicio
-    from src.operaciones   import configuracion
+    import src.main
     from src.misc.globales import lapso
+    from src.operaciones   import configuracion
 
 def nombre_operacion(posicion):
     """
     Función que imprime el nombre correspondiente a cada operación.
     """
-    nombres = ("[CONFIGURACIÓN]", "[  CONSULTAS  ]", "[   RETIROS   ]",
-               "[TRANSFERENCIA]", "[FINALIZANDO]")
+    nombres = ("", "[  ACCEDIENDO ]\n", "[CONFIGURACIÓN]\n", "[  CONSULTAS  ]\n",
+                   "[   RETIROS   ]\n", "[TRANSFERENCIA]\n", "[ ABANDONANDO ]\n")
 
-    print(f"\n\t\t\t       {nombres[posicion]}\n")
+    print(f"\n\t\t\t       {nombres[posicion]}")
 
 def head():
     """
@@ -48,13 +48,11 @@ def activacion():
 
     head()
     print("\n\t\t       Ingrese la tarjeta en la ranura")
-    lapso(2)
+    lapso()
 
     head()
     print("\n\t\t\t     Leyendo tarjeta")
-    lapso(2)
-
-    inicio(0)
+    lapso()
 
 def continuar():
     """
@@ -68,12 +66,14 @@ def final(nro_mensaje):
     """
     Función que cierra la sesión actual, producida lo que especifica en el mensaje.
     """
-    mensajes = ("\n\t\t\t      Guarde su tarjeta \
-\n\t\t     Gracias por confiar en InterBanca ©",
-                "\n\t       Demasiados intentos fallidos, tarjeta retenida \
+    mensajes = ("\t\t\t      Guarde su tarjeta \n\t\t     Gracias por confiar en InterBanca ©",
+"\t       Demasiados intentos fallidos, tarjeta retenida\
 \n\t  Para más información, contacte a su proveedor de tarjetas")
 
     head()
-    print(mensajes[nro_mensaje])
-    lapso(3)
-    activacion()
+    nombre_operacion(6)
+    print(f"{mensajes[nro_mensaje]}")
+    lapso() #
+    lapso() # medio feo hacerlo así
+    head()
+    main.principal()
