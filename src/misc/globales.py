@@ -3,6 +3,8 @@ Funciones útiles y variables globales.
 """
 from time import sleep
 
+# pylint: disable=C0103
+
 tiempos = True  #
 dinero  = 85000 # única variable que puede cambiar durante la ejecución del programa.
 clave_a = 12345
@@ -10,8 +12,10 @@ clave_b = 98765
 dni     = 12345678
 sol     = 0.0419294118
 
-intento     = 1     #
-cta_debitar = 55667 #
+intentos    = 1
+cta_debitar = 55667
+
+# pylint: enable-msg=C0103
 
 def lapso(segundos):
     """

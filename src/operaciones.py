@@ -25,8 +25,6 @@ def configuracion():
     else:
         configuracion()
 
-    menu.opciones()
-
 def consulta():
     """
     Función que permite la consulta de saldo en la cuenta.
@@ -126,16 +124,13 @@ def transferencia(intentos):
     misc.interfaz.nombre_operacion(3)
 
     clave = int(input(" >> Ingrese la clave de seguridad: "))
-    try:
-        assert clave == misc.globales.clave_a
+    if clave == misc.globales.clave_a:
         numero = int(input(" >> Ingrese número de cuenta destino: "))
-        try:
-            assert numero == misc.globales.clave_b
+        if numero == misc.globales.clave_b:
             tipo_cambio()
 
             monto = float(input("\n >> Ingrese monto: $"))
-            try:
-                assert 0 < monto <= misc.globales.saldo
+            if 0 < monto <= misc.globales.saldo:
                 if misc.globales.moneda == "ARS":
                     misc.globales.dinero -= monto
                 else:
@@ -145,15 +140,15 @@ def transferencia(intentos):
                 misc.interfaz.nombre_operacion(3)
                 print("\t\t\t      Operación exitosa")
 
-            except:
+            else:
                 misc.interfaz.head()
                 misc.interfaz.nombre_operacion(3)
                 print("\t\t\t     Saldo insuficiente")
-        except:
+        else:
             misc.interfaz.head()
             misc.interfaz.nombre_operacion(3)
             print("\t\t\t     Cuenta inexistente")
-    except:
+    else:
         intentos += 1
 
         if intentos == 3:

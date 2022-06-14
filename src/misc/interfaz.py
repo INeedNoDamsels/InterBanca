@@ -3,22 +3,27 @@ Interfaces y demás extras para simular realismo.
 """
 from os import system, name
 try:
-    from .globales import lapso
-    from menu      import inicio
+    from menu          import inicio
+    from operaciones   import configuracion
+    from misc.globales import lapso
 except ImportError:
-    from src.misc.globales import lapso
     from src.menu          import inicio
+    from src.operaciones   import configuracion
+    from src.misc.globales import lapso
 
 def nombre_operacion(posicion):
     """
     Función que imprime el nombre correspondiente a cada operación.
     """
-    nombres = ("[CONFIGURACIÓN]", "[  CONSULTAS  ]", "[   RETIROS   ]", "[TRANSFERENCIA]", "[FINALIZANDO]")
+    nombres = ("[CONFIGURACIÓN]", "[  CONSULTAS  ]", "[   RETIROS   ]",
+               "[TRANSFERENCIA]", "[FINALIZANDO]")
+
     print(f"\n\t\t\t       {nombres[posicion]}\n")
 
 def head():
     """
-    Función que limpia la pantalla e imprime ese interfaz tan querido por la comunidad bancaria Peruana-Argentina.
+     Función que limpia la pantalla
+    e imprime ese interfaz tan querido por la comunidad bancaria Peruana-Argentina.
     """
     if name == "nt":      # para Windows
         _ = system("cls")
@@ -55,7 +60,9 @@ def continuar():
     """
     Función que solicita al usuario interacción con el ATM para continuar su ejecución.
     """
-    input("\n\t\t\tPresione Enter para continuar ")
+    _ = input("\n\t\t\tPresione Enter para continuar ")
+    if _ == "0":
+        configuracion()
 
 def final(nro_mensaje):
     """

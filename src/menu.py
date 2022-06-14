@@ -18,15 +18,13 @@ def inicio(intentos):
 
     clave     = int(input("\n>> Ingrese la clave de seguridad : "))
     documento = int(input(">> Ingrese su número de documento: "))
-    try:
-        assert (clave == misc.globales.clave_a) and (documento == misc.globales.dni)
+    if (clave == misc.globales.clave_a) and (documento == misc.globales.dni):
         opciones()
-    except:
+    else:
         intentos += 1
 
         if intentos == 3:
-            misc.interfaz.final("\n\t       Demasiados intentos fallidos, tarjeta retenida \
-\n\t  Para más información, contacte a su proveedor de tarjetas")
+            misc.interfaz.final(1)
         else:
             inicio(intentos)
 
@@ -40,10 +38,9 @@ def opciones():
 \n\n\t\t <1> Consultas <2> Retiros <3> Transferencia\n\t\t\t\t  <4> Salir \
 \n >> Ingrese operación: "))
 
-    try:
-        assert -1 < opcion < 5
+    if 0 < opcion < 5:
         operacion(opcion)
-    except:
+    else:
         opciones()
 
 def operacion(opcion):
@@ -52,9 +49,7 @@ def operacion(opcion):
     """
     misc.interfaz.head()
 
-    if opcion == 0:
-        operaciones.configuracion()
-    elif opcion == 1:
+    if opcion == 1:
         operaciones.consulta()
     elif opcion == 2:
         operaciones.retiro()
