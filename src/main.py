@@ -32,9 +32,10 @@ def ingreso_valor(minimo, maximo, operacion, mensaje):
     """
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(operacion)
-
     try:
         valor = int(input(mensaje))
+        if valor==0:
+            opciones()
         if not minimo <= valor <= maximo:
             raise ValorFueraDeRango
     except ValorFueraDeRango:
@@ -65,16 +66,16 @@ def principal():
     """
     Función que permite el inicio de tus aventuras con la ATM.
     """
-    intentos, usuario_validado = 0, False
+    intentos, usuario_validado =0, False
     misc.interfaz.activacion()
-
     while usuario_validado is not True:
         misc.interfaz.head()
-        intentos += 1
-        usuario_validado = ingreso()
-
-        if intentos == 3:
+        intentos+=1
+        usuario_validado=ingreso()
+        
+        if intentos==2:
             misc.interfaz.final(1)
+
 
     opciones()
 
