@@ -36,16 +36,36 @@ def consulta(opcion):
         print(f"\t\t\tSaldo disponible: ${misc.globales.saldo} {misc.globales.moneda}")
         misc.interfaz.continuar()
     elif opcion == 2:
-        pass # Movimientos
+        # Movimientos2w
+        main.opciones()
 
-    main.opciones()
-
-def retiro():
+def retiro(clave0,monto_a_retirar,preg):
     """
     Función que permite el retiro de dinero.
     """
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(4)
+    if monto_a_retirar>0 and monto_a_retirar<misc.globales.saldo:
+        if menu.validar_datos(clave0, misc.globales.clave_a) is True:
+            if preg==1:
+                codigo=2
+                if misc.globales.moneda == "ARS":
+                    misc.globales.dinero -= monto_a_retirar
+                else:
+                    misc.globales.dinero -= misc.globales.conversor_a_ars(monto_a_retirar)
+            else:
+                codigo=0
+                if misc.globales.moneda == "ARS":
+                    misc.globales.dinero -= monto_a_retirar
+                else:
+                    misc.globales.dinero -= misc.globales.conversor_a_ars(monto_a_retirar)
+        else:
+            codigo=1
+    else:
+        codigo=1
+    return codigo
+            
+        
 
 def transferencia(clave, monto):
     """

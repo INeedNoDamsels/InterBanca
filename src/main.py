@@ -47,7 +47,7 @@ def opciones():
     Función que permite al usuario ver y elegir las distintas operaciones disponibles.
     """
     opcion = ingreso_valor(1, 4, 0, "\t\t\t\t Bienvenido\n\
-\n\t\t  <1> Consulta <3> Retiro <3> Transferencia\n\t\t\t\t  <4> Salir\
+\n\t\t  <1> Consulta <2> Retiro <3> Transferencia\n\t\t\t\t  <4> Salir\
 \n\n>> Ingrese número de operación: ")
 
     menu.operacion(opcion)
