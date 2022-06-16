@@ -35,7 +35,8 @@ def operacion(opcion):
         misc.globales.tipo_cambio(tipo_moneda)
 
     if opcion == 1:
-        operaciones.consulta(1)
+        operacion=main.ingreso_valor(1,2,3, "<1>Posicion global <2>Movimientos ")
+        operaciones.consulta(operacion)
     elif opcion == 2:
         clave=main.ingreso_valor(0, 99999, 4, ">> Ingrese su clave: " )
         monto=main.ingreso_valor(0, misc.globales.saldo , 4, ">> Ingrese el monto a retirar (<0> Salir): $")

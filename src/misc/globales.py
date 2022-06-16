@@ -11,6 +11,7 @@ clave_a = 12345
 clave_b = 98765
 dni     = 12345678
 sol     = 0.0419294118
+ejecutado=False
 
 # pylint: enable-msg=C0103
 

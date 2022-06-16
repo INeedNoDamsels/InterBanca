@@ -1,11 +1,14 @@
 """
 Operaciones disponibles del ATM.
 """
+from random import randint
 try:
     import main
     import menu
     import misc.interfaz
+    import misc.globales
 except ImportError:
+    import src.misc.globales
     import src.main
     import src.menu
     import src.misc.interfaz
@@ -24,6 +27,7 @@ def configuracion():
         misc.globales.tiempos = False
     else:
         configuracion()
+    
 
 def consulta(opcion):
     """
@@ -31,13 +35,29 @@ def consulta(opcion):
     """
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(3)
+def movimientos():
+    textos  = ( "Extracción de $", "Transferencia de $", "Recibo de $", "Depósito de $")
+    x=[]
+    y=[]
+    if misc.globales.ejecutado is False:
+        for i in range(10):
+            misc.globales.ejecutado=True
+            valores = randint(1, 15) * 550
+            x.append (randint(0, 3))
+            if misc.globales.moneda=="PER":
+                valores=misc.globales.conversor_a_per(valores)
+            y.append(valores)
+    for j in range(10):
+        contador=x[j]
+        print(f"{textos[contador]}{y[contador]}")
 
+def consulta(opcion):
     if opcion == 1:
         print(f"\t\t\tSaldo disponible: ${misc.globales.saldo} {misc.globales.moneda}")
+    elif opcion ==2:
+        movimientos()
         misc.interfaz.continuar()
-    elif opcion == 2:
-        # Movimientos2w
-        main.opciones()
+    main.opciones()
 
 def retiro(clave,monto,pregunta):
     """
