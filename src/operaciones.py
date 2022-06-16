@@ -8,10 +8,10 @@ try:
     import misc.interfaz
     import misc.globales
 except ImportError:
-    import src.misc.globales
     import src.main
     import src.menu
     import src.misc.interfaz
+    import src.misc.globales
 
 def configuracion():
     """
@@ -27,36 +27,43 @@ def configuracion():
         misc.globales.tiempos = False
     else:
         configuracion()
-    
+
+def movimientos():
+    """
+    """
+    nombres  = ("Depósito     ", "Extracción   ", "Recibo       ", "Transferencia")
+
+    if misc.globales.ejecutado is False:
+
+        misc.globales.ejecutado = True
+
+        for _ in range(10):
+            valores = (randint(1, 15) * 550) * 1.2
+
+            if misc.globales.moneda == "PER":
+                valores = misc.globales.conversor_a_per(valores)
+
+            i = randint(0, 3)
+            misc.globales.mov_nombres.append(nombres[i])
+            misc.globales.mov_valores.append(round(valores, 2))
+
+    for j in range(len(misc.globales.mov_nombres)):
+        print(f"\t\t\t   -----------------------\
+\n\t\t\t    {misc.globales.mov_nombres[j]} ${misc.globales.mov_valores[j]}")
+
+    misc.interfaz.continuar()
 
 def consulta(opcion):
     """
-    Función que permite la consulta de saldo en la cuenta.
     """
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(3)
-def movimientos():
-    textos  = ( "Extracción de $", "Transferencia de $", "Recibo de $", "Depósito de $")
-    x=[]
-    y=[]
-    if misc.globales.ejecutado is False:
-        for i in range(10):
-            misc.globales.ejecutado=True
-            valores = randint(1, 15) * 550
-            x.append (randint(0, 3))
-            if misc.globales.moneda=="PER":
-                valores=misc.globales.conversor_a_per(valores)
-            y.append(valores)
-    for j in range(10):
-        contador=x[j]
-        print(f"{textos[contador]}{y[contador]}")
 
-def consulta(opcion):
     if opcion == 1:
         print(f"\t\t\tSaldo disponible: ${misc.globales.saldo} {misc.globales.moneda}")
-    elif opcion ==2:
+    elif opcion == 2:
         movimientos()
-        misc.interfaz.continuar()
+
     main.opciones()
 
 def retiro(clave,monto,pregunta):
@@ -65,20 +72,22 @@ def retiro(clave,monto,pregunta):
     """
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(4)
+
     if menu.validar_datos(clave, misc.globales.clave_a) is True:
-        if pregunta==1:
-            codigo=2
+        if pregunta == 1:
+            codigo = 2
         else:
-            codigo=0
+            codigo = 0
         if misc.globales.moneda == "ARS":
             misc.globales.dinero -= monto
         else:
             misc.globales.dinero -= misc.globales.conversor_a_ars(monto)
+        misc.globales.mov_nombres.append("Extracción   ")
+        misc.globales.mov_valores.append(round(monto, 2))
     else:
-        codigo=1
+        codigo = 1
+
     return codigo
-            
-        
 
 def transferencia(clave, monto):
     """
@@ -92,6 +101,8 @@ def transferencia(clave, monto):
             misc.globales.dinero -= monto
         else:
             misc.globales.dinero -= misc.globales.conversor_a_ars(monto)
+        misc.globales.mov_nombres.append("Transferencia")
+        misc.globales.mov_valores.append(round(monto, 2))
         codigo = 0
     else:
         codigo = 1

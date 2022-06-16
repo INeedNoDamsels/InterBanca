@@ -32,9 +32,10 @@ def ingreso_valor(minimo, maximo, operacion, mensaje):
     """
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(operacion)
+
     try:
         valor = int(input(mensaje))
-        if valor==0:
+        if valor == 0:
             opciones()
         if not minimo <= valor <= maximo:
             raise ValorFueraDeRango
@@ -58,7 +59,7 @@ def ingreso():
     Función que solicita el ingreso de los datos del usuario para verificar su identidad.
     """
     clave = ingreso_valor(0, 99999, 1, ">> Ingrese la clave de seguridad: ")
-    documento = ingreso_valor(0, 999999999, 1, ">> Ingrese su nro. de documento : ")
+    documento = ingreso_valor(0, 99999999, 1, ">> Ingrese su nro. de documento : ")
 
     return menu.inicio(clave, documento)
 
@@ -66,16 +67,17 @@ def principal():
     """
     Función que permite el inicio de tus aventuras con la ATM.
     """
-    intentos, usuario_validado =0, False
     misc.interfaz.activacion()
+
+    intentos, usuario_validado = 0, False
+
     while usuario_validado is not True:
         misc.interfaz.head()
-        intentos+=1
-        usuario_validado=ingreso()
-        
-        if intentos==2:
-            misc.interfaz.final(1)
 
+        intentos += 1
+        usuario_validado = ingreso()        
+        if intentos == 2:
+            misc.interfaz.final(1)
 
     opciones()
 
