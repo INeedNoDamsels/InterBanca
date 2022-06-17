@@ -5,15 +5,13 @@
 ################
 
 """
-Test correspondientes a 'nombre_archivo'.
+Test correspondientes al archivo 'nombre_archivo'.
 """
 #!/usr/bin/python
-import sys
-import pytest
 
-from #path_archivo import #funcion/es
+"""
+from path_archivo import funcion/es
 
-# testing:
-
-if __name__ == "__main__":
-    principal()
+# testing: nombre_funcion(argumentos)
+def test_nombre_funcion():
+"""

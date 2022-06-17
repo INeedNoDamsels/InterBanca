@@ -52,7 +52,18 @@ def opciones():
 \n\t\t  <1> Consulta <2> Retiro <3> Transferencia\n\t\t\t\t  <4> Salir\
 \n\n>> Ingrese número de operación: ")
 
-    menu.operacion(opcion)
+    codigo = menu.operacion(opcion)
+
+    if 2 <= opcion <= 3:
+        if codigo == 0:
+            print("\t\t\t      Operación exitosa")
+        elif codigo == 2:
+            print("\t\t\t      Operación exitosa\n\t\t\t\t Imprimiendo")
+        else:
+            print("\t\t\t      Operación fallida")
+
+        misc.globales.lapso()
+        opciones()
 
 def ingreso():
     """

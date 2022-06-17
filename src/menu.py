@@ -22,7 +22,7 @@ def inicio(clave, documento):
     """
     Función que verifica la clave de seguridad y documento del usuario.
     """
-    usuario_validado = bool((clave == misc.globales.clave_a) and (documento == misc.globales.dni))
+    usuario_validado = ((validar_datos(clave, misc.globales.clave_a) is True) and (validar_datos(documento, misc.globales.dni) is True))
 
     return usuario_validado
 
@@ -30,6 +30,8 @@ def operacion(opcion):
     """
     Función que redirige al usuario a la operacion deseada.
     """
+    codigo = 0
+
     if opcion != 4:
         tipo_moneda = main.ingreso_valor(1, 2, 0, ">> Ingrese tipo de moneda (<1> ARS <2> PER): ")
         misc.globales.tipo_cambio(tipo_moneda)
@@ -51,14 +53,5 @@ def operacion(opcion):
     else:
         operaciones.salir()
 
-    if 2 <= opcion <= 3:
-        if codigo == 0:
-            print("\t\t\t      Operación exitosa")
-        elif codigo == 2:
-            print("\t\t\t      Operación exitosa\n\t\t\t\t Imprimiendo")
-        else:
-            print("\t\t\t      Operación fallida")
-
-        misc.globales.lapso()
-
+    return codigo
     main.opciones()

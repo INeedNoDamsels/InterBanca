@@ -51,8 +51,6 @@ def movimientos():
         print(f"\t\t\t   -----------------------\
 \n\t\t\t    {misc.globales.mov_nombres[j]} ${misc.globales.mov_valores[j]}")
 
-    misc.interfaz.continuar()
-
 def consulta(opcion):
     """
     """
@@ -64,9 +62,10 @@ def consulta(opcion):
     elif opcion == 2:
         movimientos()
 
+    misc.interfaz.continuar()
     main.opciones()
 
-def retiro(clave,monto,pregunta):
+def retiro(clave, monto, pregunta):
     """
     Función que permite el retiro de dinero.
     """
