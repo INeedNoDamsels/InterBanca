@@ -41,13 +41,13 @@ def operacion(opcion):
         operaciones.consulta(operacion)
     elif opcion == 2:
         clave    = main.ingreso_valor(0, 99999, 4, ">> Ingrese su clave: " )
-        monto    = main.ingreso_valor(0, misc.globales.saldo , 4, ">> Ingrese el monto a retirar (<0> Salir): $")
+        monto    = main.ingreso_valor(0, misc.globales.saldo , 4, ">> Ingrese el monto a retirar (<-1> Salir): $")
         pregunta = main.ingreso_valor(1,2,4,"¿Desea imprimir el voucher? (<1> Si <2> No): ")
 
         codigo   = operaciones.retiro(clave,monto,pregunta)
     elif opcion == 3:
         clave  = main.ingreso_valor(0, 99999, 5, ">> Ingrese el número de cuenta destino: ")
-        monto  = main.ingreso_valor(100, 85000, 5, ">> Ingrese el monto para transferir (<0> Salir): $")
+        monto  = main.ingreso_valor(100, 85000, 5, ">> Ingrese el monto para transferir (<-1> Salir): $")
 
         codigo = operaciones.transferencia(clave, monto)
     else:

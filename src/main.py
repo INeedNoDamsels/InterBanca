@@ -35,7 +35,7 @@ def ingreso_valor(minimo, maximo, operacion, mensaje):
 
     try:
         valor = int(input(mensaje))
-        if valor == 0:
+        if valor == -1:
             opciones()
         if not minimo <= valor <= maximo:
             raise ValorFueraDeRango
