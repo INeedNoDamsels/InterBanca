@@ -65,16 +65,16 @@ def opciones():
         misc.globales.lapso()
         opciones()
 
-def ingreso():
+def ingreso(): # se puede saltear esta parte introduciendo '0' en cualquiera de los dos campos.
     """
     Función que solicita el ingreso de los datos del usuario para verificar su identidad.
     """
-    clave = ingreso_valor(0, 99999, 1, ">> Ingrese la clave de seguridad: ")
+    clave     = ingreso_valor(0, 99999, 1, ">> Ingrese la clave de seguridad: ")
     documento = ingreso_valor(0, 99999999, 1, ">> Ingrese su nro. de documento : ")
 
     return menu.inicio(clave, documento)
 
-def principal():
+def principal(): # hay que corregir los intentos, no funciona correctamente !!!
     """
     Función que permite el inicio de tus aventuras con la ATM.
     """
@@ -86,7 +86,7 @@ def principal():
         misc.interfaz.head()
 
         intentos += 1
-        usuario_validado = ingreso()        
+        usuario_validado = ingreso()
         if intentos == 2:
             misc.interfaz.final(1)
 
