@@ -7,13 +7,12 @@ from time import sleep
 
 tiempos = True  #
 dinero  = 85000 # única variable que puede cambiar durante la ejecución del programa.
+bandera = False #
+mov_nombres, mov_valores = [], []
 clave_a = 12345
 clave_b = 98765
 dni     = 12345678
 sol     = 0.0419294118
-
-ejecutado = False
-mov_nombres, mov_valores = [], []
 
 # pylint: enable-msg=C0103
 

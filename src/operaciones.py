@@ -1,7 +1,6 @@
 """
 Operaciones disponibles del ATM.
 """
-from random import randint
 try:
     import main
     import menu
@@ -12,6 +11,14 @@ except ImportError:
     import src.menu
     import src.misc.interfaz
     import src.misc.globales
+
+def movimientos():
+    """
+    Función que muestra los movimientos realizados por el usuario.
+    """
+    for i in range(len(misc.globales.mov_nombres)):
+        print(f"\t\t\t   -----------------------\
+\n\t\t\t    {misc.globales.mov_nombres[i]} ${misc.globales.mov_valores[i]}")
 
 def configuracion():
     """
@@ -28,38 +35,15 @@ def configuracion():
     else:
         configuracion()
 
-def movimientos():
-    """
-    """
-    nombres  = ("Depósito     ", "Extracción   ", "Recibo       ", "Transferencia")
-
-    if misc.globales.ejecutado is False:
-
-        misc.globales.ejecutado = True
-
-        for _ in range(10):
-            valores = (randint(1, 15) * 550) * 1.2
-
-            if misc.globales.moneda == "PER":
-                valores = misc.globales.conversor_a_per(valores)
-
-            i = randint(0, 3)
-            misc.globales.mov_nombres.append(nombres[i])
-            misc.globales.mov_valores.append(round(valores, 2))
-
-    for j in range(len(misc.globales.mov_nombres)):
-        print(f"\t\t\t   -----------------------\
-\n\t\t\t    {misc.globales.mov_nombres[j]} ${misc.globales.mov_valores[j]}")
-
 def consulta(opcion):
     """
+    Función que permite la consulta de información de la cuenta.
     """
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(3)
 
     if opcion == 1:
         print(f"\t\t\tSaldo disponible: ${misc.globales.saldo} {misc.globales.moneda}")
-        misc.interfaz.continuar()
     elif opcion == 2:
         movimientos()
 

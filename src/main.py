@@ -7,6 +7,7 @@
 """
 Programa principal, el esqueleto.
 """
+from random import randint
 try:
     import menu
     import misc.interfaz
@@ -35,10 +36,10 @@ def ingreso_valor(minimo, maximo, operacion, mensaje):
 
     try:
         valor = int(input(mensaje))
-        if valor == 0:
-            opciones()
         if not minimo <= valor <= maximo:
             raise ValorFueraDeRango
+        elif valor == 0:
+            opciones()
     except ValorFueraDeRango:
         ingreso_valor(minimo, maximo, operacion, mensaje)
 
@@ -69,10 +70,25 @@ def ingreso(): # se puede saltear esta parte introduciendo '0' en cualquiera de 
     """
     Función que solicita el ingreso de los datos del usuario para verificar su identidad.
     """
-    clave     = ingreso_valor(0, 99999, 1, ">> Ingrese la clave de seguridad: ")
-    documento = ingreso_valor(0, 99999999, 1, ">> Ingrese su nro. de documento : ")
+    clave     = ingreso_valor(1, 99999, 1, ">> Ingrese la clave de seguridad: ")
+    documento = ingreso_valor(1, 99999999, 1, ">> Ingrese su nro. de documento : ")
 
     return menu.inicio(clave, documento)
+
+def generacion_movimientos():
+    """
+    Función que genera 10 movimientos aleatorios.
+    """
+    nombres  = ("Depósito     ", "Extracción   ", "Recibo       ", "Transferencia")
+
+    if misc.globales.bandera is False:
+        misc.globales.bandera = True
+
+        for _ in range(10):
+            valores = (randint(1, 15) * 550) * 1.2
+            i = randint(0, 3)
+            misc.globales.mov_nombres.append(nombres[i])
+            misc.globales.mov_valores.append(valores)
 
 def principal(): # hay que corregir los intentos, no funciona correctamente !!!
     """
@@ -81,6 +97,8 @@ def principal(): # hay que corregir los intentos, no funciona correctamente !!!
     misc.interfaz.activacion()
 
     intentos, usuario_validado = 0, False
+
+    generacion_movimientos()
 
     while usuario_validado is not True:
         misc.interfaz.head()

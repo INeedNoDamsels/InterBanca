@@ -48,6 +48,7 @@ def operacion(opcion):
     elif opcion == 3:
         clave  = main.ingreso_valor(0, 99999, 5, ">> Ingrese el número de cuenta destino: ")
         monto  = main.ingreso_valor(100, misc.globales.saldo, 5, ">> Ingrese el monto para transferir (<0> Salir): $")
+        monto  = main.ingreso_valor(100, 85000, 5, ">> Ingrese el monto para transferir (<-1> Salir): $")
 
         codigo = operaciones.transferencia(clave, monto)
     else:
