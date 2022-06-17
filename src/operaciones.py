@@ -59,6 +59,7 @@ def consulta(opcion):
 
     if opcion == 1:
         print(f"\t\t\tSaldo disponible: ${misc.globales.saldo} {misc.globales.moneda}")
+        misc.interfaz.continuar()
     elif opcion == 2:
         movimientos()
 
