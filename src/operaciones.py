@@ -83,7 +83,6 @@ def retiro(clave,monto,pregunta):
             misc.globales.dinero -= monto
         else:
             misc.globales.dinero -= misc.globales.conversor_a_ars(monto)
-            monto=misc.globales.conversor_a_per(monto)
         misc.globales.mov_nombres.append("Extracción   ")
         misc.globales.mov_valores.append(round(monto, 2))
     else:
