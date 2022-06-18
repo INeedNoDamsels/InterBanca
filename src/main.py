@@ -35,10 +35,10 @@ def ingreso_valor(minimo, maximo, operacion, mensaje):
     misc.interfaz.nombre_operacion(operacion)
 
     try:
-        valor = int(input(mensaje))
+        valor = float(input(mensaje))
         if not minimo <= valor <= maximo:
             raise ValorFueraDeRango
-        elif valor == 0:
+        if valor == 0:
             opciones()
     except ValorFueraDeRango:
         ingreso_valor(minimo, maximo, operacion, mensaje)
@@ -56,12 +56,12 @@ def opciones():
     codigo = menu.operacion(opcion)
 
     if 2 <= opcion <= 3:
-        if codigo == 0:
+        if 0 < codigo < 3:
             print("\t\t\t      Operación exitosa")
-        elif codigo == 2:
-            print("\t\t\t      Operación exitosa\n\t\t\t\t Imprimiendo")
+            if codigo == 2:
+                print("\t\t\t\t Imprimiendo")
         else:
-            print("\t\t\t      Operación fallida")
+            print("\t\t    Operación fallida, cuenta inexistente")
 
         misc.globales.lapso()
         opciones()
@@ -70,8 +70,8 @@ def ingreso(): # se puede saltear esta parte introduciendo '0' en cualquiera de 
     """
     Función que solicita el ingreso de los datos del usuario para verificar su identidad.
     """
-    clave     = ingreso_valor(1, 99999, 1, ">> Ingrese la clave de seguridad: ")
-    documento = ingreso_valor(1, 99999999, 1, ">> Ingrese su nro. de documento : ")
+    clave     = ingreso_valor(10000, 99999, 1, ">> Ingrese la clave de seguridad: ")
+    documento = ingreso_valor(10000000, 99999999, 1, ">> Ingrese su nro. de documento : ")
 
     return menu.inicio(clave, documento)
 
@@ -85,10 +85,17 @@ def generacion_movimientos():
         misc.globales.bandera = True
 
         for _ in range(10):
-            valores = (randint(1, 15) * 550) * 1.2
             i = randint(0, 3)
+            j = randint(0, 1)
+            if j == 1:
+                valores = (randint(1, 15) * 550) * 1.2 # ARS
+                misc.globales.mov_monedas.append("ARS")
+            else:
+                valores = (randint(1, 15) * 22.05) * 1.2 # PER
+                misc.globales.mov_monedas.append("PER")
+
             misc.globales.mov_nombres.append(nombres[i])
-            misc.globales.mov_valores.append(valores)
+            misc.globales.mov_valores.append(round(valores, 2))
 
 def principal(): # hay que corregir los intentos, no funciona correctamente !!!
     """
@@ -105,7 +112,7 @@ def principal(): # hay que corregir los intentos, no funciona correctamente !!!
 
         intentos += 1
         usuario_validado = ingreso()
-        if intentos == 2 and usuario_validado is False:
+        if intentos == 3 and usuario_validado is False:
             misc.interfaz.final(1)
 
     opciones()

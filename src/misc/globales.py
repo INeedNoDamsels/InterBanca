@@ -8,7 +8,7 @@ from time import sleep
 tiempos = True  #
 dinero  = 85000 # única variable que puede cambiar durante la ejecución del programa.
 bandera = False #
-mov_nombres, mov_valores = [], []
+mov_nombres, mov_valores, mov_monedas = [], [], []
 clave_a = 12345
 clave_b = 98765
 dni     = 12345678

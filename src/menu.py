@@ -37,22 +37,20 @@ def operacion(opcion):
         misc.globales.tipo_cambio(tipo_moneda)
 
     if opcion == 1:
-        operacion = main.ingreso_valor(1,2,3, "<1> Posicion global <2> Movimientos: ")
-        operaciones.consulta(operacion)
+        opcion_b = main.ingreso_valor(1, 2, 3, "<1> Posicion global <2> Movimientos: ")
+        operaciones.consulta(opcion_b)
     elif opcion == 2:
-        clave    = main.ingreso_valor(0, 99999, 4, ">> Ingrese su clave: " )
-        monto    = main.ingreso_valor(0, misc.globales.saldo , 4, ">> Ingrese el monto a retirar (<0> Salir): $")
-        pregunta = main.ingreso_valor(1,2,4,"¿Desea imprimir el voucher? (<1> Si <2> No): ")
+        clave    = main.ingreso_valor(10000, 99999, 4, ">> Ingrese su clave: " )
+        monto    = main.ingreso_valor(0, misc.globales.saldo, 4, ">> Ingrese el monto a retirar (<0> Salir): $")
+        pregunta = main.ingreso_valor(1, 2, 4, "¿Desea imprimir el voucher? (<1> Si <2> No): ")
 
-        codigo   = operaciones.retiro(clave,monto,pregunta)
+        codigo   = operaciones.retiro(clave, monto, pregunta)
     elif opcion == 3:
-        clave  = main.ingreso_valor(0, 99999, 5, ">> Ingrese el número de cuenta destino: ")
-        monto  = main.ingreso_valor(100, misc.globales.saldo, 5, ">> Ingrese el monto para transferir (<0> Salir): $")
-        monto  = main.ingreso_valor(100, 85000, 5, ">> Ingrese el monto para transferir (<-1> Salir): $")
+        clave  = main.ingreso_valor(10000, 99999, 5, ">> Ingrese el número de cuenta destino: ")
+        monto  = main.ingreso_valor(0, misc.globales.saldo, 5, ">> Ingrese el monto a transferir (<0> Salir): $")
 
         codigo = operaciones.transferencia(clave, monto)
     else:
         operaciones.salir()
 
     return codigo
-    main.opciones()
