@@ -17,8 +17,8 @@ def movimientos():
     Función que muestra los movimientos realizados por el usuario.
     """
     for i in range(len(misc.globales.mov_nombres)):
-        print(f"\t\t\t   -----------------------\
-\n\t\t\t    {misc.globales.mov_nombres[i]} ${misc.globales.mov_valores[i]}")
+        print(f"\t\t\t ---------------------------\n\t\t\t\
+{misc.globales.mov_nombres[i]} {misc.globales.mov_monedas[i]} ${misc.globales.mov_valores[i]}")
 
 def configuracion():
     """
@@ -57,19 +57,20 @@ def retiro(clave, monto, pregunta):
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(4)
 
-    if menu.validar_datos(clave, misc.globales.clave_a) is True:
+    if (menu.validar_datos(clave, misc.globales.clave_a)) is True:
         if pregunta == 1:
             codigo = 2
         else:
-            codigo = 0
+            codigo = 1
         if misc.globales.moneda == "ARS":
             misc.globales.dinero -= monto
         else:
             misc.globales.dinero -= misc.globales.conversor_a_ars(monto)
         misc.globales.mov_nombres.append("Extracción   ")
         misc.globales.mov_valores.append(round(monto, 2))
+        misc.globales.mov_monedas.append(misc.globales.moneda)
     else:
-        codigo = 1
+        codigo = 0
 
     return codigo
 
@@ -87,9 +88,10 @@ def transferencia(clave, monto):
             misc.globales.dinero -= misc.globales.conversor_a_ars(monto)
         misc.globales.mov_nombres.append("Transferencia")
         misc.globales.mov_valores.append(round(monto, 2))
-        codigo = 0
-    else:
+        misc.globales.mov_monedas.append(misc.globales.moneda)
         codigo = 1
+    else:
+        codigo = 0
 
     return codigo
 
