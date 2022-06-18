@@ -22,3 +22,6 @@ def test_conversor_a_ars():
     resultado=conversor_a_ars(valor)
     assert isinstance (resultado, float), "el resultado debe ser un nro"
     assert resultado==7154.88, "No se obtiene el resultado esperado"
+
+    
+    
