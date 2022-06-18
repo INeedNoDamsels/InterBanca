@@ -18,19 +18,13 @@ except ImportError:
     import src.misc.globales
 
 class Error(Exception):
-    """
-    Clase base para otras excepciones.
-    """
+    """Clase base para otras excepciones."""
 
 class ValorFueraDeRango(Error):
-    """
-    Cuando se ingresa un valor fuera del rango permitido.
-    """
+    """Cuando se ingresa un valor fuera del rango permitido."""
 
 def ingreso_valor(minimo, maximo, operacion, mensaje):
-    """
-    Función que permite el ingreso de un valor en un intervalo definido.
-    """
+    """Función que permite el ingreso de un valor en un intervalo definido."""
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(operacion)
 
@@ -46,9 +40,7 @@ def ingreso_valor(minimo, maximo, operacion, mensaje):
     return valor
 
 def opciones():
-    """
-    Función que permite al usuario ver y elegir las distintas operaciones disponibles.
-    """
+    """Función que permite al usuario ver y elegir las distintas operaciones disponibles."""
     opcion = ingreso_valor(1, 4, 0, "\t\t\t\t Bienvenido\n\
 \n\t\t  <1> Consulta <2> Retiro <3> Transferencia\n\t\t\t\t  <4> Salir\
 \n\n>> Ingrese número de operación: ")
@@ -66,19 +58,15 @@ def opciones():
         misc.globales.lapso()
         opciones()
 
-def ingreso(): # se puede saltear esta parte introduciendo '0' en cualquiera de los dos campos.
-    """
-    Función que solicita el ingreso de los datos del usuario para verificar su identidad.
-    """
+def ingreso():
+    """Función que solicita el ingreso de los datos del usuario para verificar su identidad."""
     clave     = ingreso_valor(10000, 99999, 1, ">> Ingrese la clave de seguridad: ")
     documento = ingreso_valor(10000000, 99999999, 1, ">> Ingrese su nro. de documento : ")
 
     return menu.inicio(clave, documento)
 
 def generacion_movimientos():
-    """
-    Función que genera 10 movimientos aleatorios.
-    """
+    """Función que genera 10 movimientos aleatorios."""
     nombres  = ("Depósito     ", "Extracción   ", "Recibo       ", "Transferencia")
 
     if misc.globales.bandera is False:
@@ -88,7 +76,7 @@ def generacion_movimientos():
             i = randint(0, 3)
             j = randint(0, 1)
             if j == 1:
-                valores = (randint(1, 15) * 550) * 1.2 # ARS
+                valores = (randint(1, 15) * 550) * 1.2   # ARS
                 misc.globales.mov_monedas.append("ARS")
             else:
                 valores = (randint(1, 15) * 22.05) * 1.2 # PER
@@ -97,10 +85,8 @@ def generacion_movimientos():
             misc.globales.mov_nombres.append(nombres[i])
             misc.globales.mov_valores.append(round(valores, 2))
 
-def principal(): # hay que corregir los intentos, no funciona correctamente !!!
-    """
-    Función que permite el inicio de tus aventuras con la ATM.
-    """
+def principal():
+    """Función que permite el inicio de tus aventuras con la ATM."""
     misc.interfaz.activacion()
 
     intentos, usuario_validado = 0, False
