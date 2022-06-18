@@ -98,7 +98,7 @@ def principal():
 
         intentos += 1
         usuario_validado = ingreso()
-        if intentos == 3 and usuario_validado is False:
+        if intentos == 3:
             misc.interfaz.final(1)
 
     opciones()
