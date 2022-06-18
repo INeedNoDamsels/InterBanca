@@ -12,14 +12,6 @@ except ImportError:
     import src.misc.interfaz
     import src.misc.globales
 
-def movimientos():
-    """
-    Función que muestra los movimientos realizados por el usuario.
-    """
-    for i in range(len(misc.globales.mov_nombres)):
-        print(f"\t\t\t ---------------------------\n\t\t\t\
-{misc.globales.mov_nombres[i]} {misc.globales.mov_monedas[i]} ${misc.globales.mov_valores[i]}")
-
 def configuracion():
     """
     Función que habilita o deshabilita el paso del tiempo al ejecutar ciertas operaciones.
@@ -45,7 +37,9 @@ def consulta(opcion):
     if opcion == 1:
         print(f"\t\t\tSaldo disponible: ${misc.globales.saldo} {misc.globales.moneda}")
     elif opcion == 2:
-        movimientos()
+        for i in range(len(misc.globales.mov_nombres)):
+            print(f"\t\t\t ---------------------------\n\t\t\t\
+  {misc.globales.mov_nombres[i]} {misc.globales.mov_monedas[i]} ${misc.globales.mov_valores[i]}")
 
     misc.interfaz.continuar()
     main.opciones()
