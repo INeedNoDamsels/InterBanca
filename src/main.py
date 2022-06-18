@@ -105,7 +105,7 @@ def principal(): # hay que corregir los intentos, no funciona correctamente !!!
 
         intentos += 1
         usuario_validado = ingreso()
-        if intentos == 2:
+        if intentos == 2 and usuario_validado is False:
             misc.interfaz.final(1)
 
     opciones()
