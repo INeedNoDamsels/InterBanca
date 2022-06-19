@@ -12,3 +12,4 @@
     * _aquí van los archivos test_
 
 **pd: ingresar '0' al inicio del programa permite ejecutar el programa en "cámara rápida" :)**
+**pd2: es recomendable ejecutar el programa desde la consola, otorga una mejor inmersión**
