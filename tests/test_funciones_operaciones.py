@@ -28,6 +28,7 @@ def test_retiro_clave_correcta_no_imprimir_ticket():
     contra=12345
     cantidad=5000
     preg=2
+    moneda="ARS"
     resultado=retiro(contra,cantidad,preg)
     assert isinstance(resultado,int), "El resultado debe ser un nro"
     assert resultado==1,"No se obtiene el resultado esperado"
