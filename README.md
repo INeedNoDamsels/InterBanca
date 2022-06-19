@@ -10,3 +10,5 @@
         * globales.py -> _Variables globales y funciones útiles._
 * :file_folder: **tests**
     * _aquí van los archivos test_
+
+**pd: ingresar '0' al inicio del programa permite ejecutar el programa en "cámara rápida" :)**
