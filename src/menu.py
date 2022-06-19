@@ -38,18 +38,18 @@ def operacion(opcion):
 
     if opcion == 1:
         opcion_b = main.ingreso_valor(1, 2, 3, "<1> Posicion global <2> Movimientos: ")
-        operaciones.consulta(opcion_b)
+        operaciones.consulta(opcion_b, misc.globales.moneda)
     elif opcion == 2:
         clave    = main.ingreso_valor(10000, 99999, 4, ">> Ingrese su clave: " )
         monto    = main.ingreso_valor(0, misc.globales.saldo, 4, ">> Ingrese el monto a retirar (<0> Salir): $")
         pregunta = main.ingreso_valor(1, 2, 4, "¿Desea imprimir el voucher? (<1> Si <2> No): ")
 
-        codigo   = operaciones.retiro(clave, monto, pregunta)
+        codigo   = operaciones.retiro(clave, monto, pregunta, misc.globales.moneda)
     elif opcion == 3:
         clave  = main.ingreso_valor(10000, 99999, 5, ">> Ingrese el número de cuenta destino: ")
         monto  = main.ingreso_valor(0, misc.globales.saldo, 5, ">> Ingrese el monto a transferir (<0> Salir): $")
 
-        codigo = operaciones.transferencia(clave, monto)
+        codigo = operaciones.transferencia(clave, monto, misc.globales.moneda)
     else:
         operaciones.salir()
 
