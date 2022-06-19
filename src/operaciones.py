@@ -27,7 +27,7 @@ def configuracion():
     else:
         configuracion()
 
-def consulta(opcion):
+def consulta(opcion, moneda):
     """
     Función que permite la consulta de información de la cuenta.
     """
@@ -35,7 +35,7 @@ def consulta(opcion):
     misc.interfaz.nombre_operacion(3)
 
     if opcion == 1:
-        print(f"\t\t\tSaldo disponible: ${misc.globales.saldo} {misc.globales.moneda}")
+        print(f"\t\t\tSaldo disponible: ${misc.globales.saldo} {moneda}")
     elif opcion == 2:
         for i in range(len(misc.globales.mov_nombres)):
             print(f"\t\t\t ---------------------------\n\t\t\t\
@@ -44,7 +44,7 @@ def consulta(opcion):
     misc.interfaz.continuar()
     main.opciones()
 
-def retiro(clave, monto, pregunta):
+def retiro(clave, monto, pregunta, moneda):
     """
     Función que permite el retiro de dinero.
     """
@@ -56,19 +56,19 @@ def retiro(clave, monto, pregunta):
             codigo = 2
         else:
             codigo = 1
-        if misc.globales.moneda == "ARS":
+        if moneda == "ARS":
             misc.globales.dinero -= monto
         else:
             misc.globales.dinero -= misc.globales.conversor_a_ars(monto)
         misc.globales.mov_nombres.append("Extracción   ")
         misc.globales.mov_valores.append(round(monto, 2))
-        misc.globales.mov_monedas.append(misc.globales.moneda)
+        misc.globales.mov_monedas.append(moneda)
     else:
         codigo = 0
 
     return codigo
 
-def transferencia(clave, monto):
+def transferencia(clave, monto, moneda):
     """
     Función que permite la transferencia de dinero de una cuente a otra.
     """
@@ -76,13 +76,13 @@ def transferencia(clave, monto):
     misc.interfaz.nombre_operacion(5)
 
     if menu.validar_datos(clave, misc.globales.clave_b) is True:
-        if misc.globales.moneda == "ARS":
+        if moneda == "ARS":
             misc.globales.dinero -= monto
         else:
             misc.globales.dinero -= misc.globales.conversor_a_ars(monto)
         misc.globales.mov_nombres.append("Transferencia")
         misc.globales.mov_valores.append(round(monto, 2))
-        misc.globales.mov_monedas.append(misc.globales.moneda)
+        misc.globales.mov_monedas.append(moneda)
         codigo = 1
     else:
         codigo = 0
