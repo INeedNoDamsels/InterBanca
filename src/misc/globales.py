@@ -1,5 +1,5 @@
 """
-Funciones útiles y variables globales.
+Funciones útiles.
 """
 from time import sleep
 
@@ -7,11 +7,6 @@ from time import sleep
 
 tiempos = True  #
 dinero  = 85000 # única variable que puede cambiar durante la ejecución del programa.
-bandera = False #
-mov_nombres, mov_valores, mov_monedas = [], [], []
-clave_a = 12345
-clave_b = 98765
-dni     = 12345678
 sol     = 0.0419294118
 
 # pylint: enable-msg=C0103
@@ -32,8 +27,6 @@ def tipo_cambio(opcion):
     """
     Función que determina el monto y moneda de referencia que utilizará el programa.
     """
-    global moneda
-    global saldo
 
     if opcion == 1:
         moneda = "ARS"
@@ -41,6 +34,8 @@ def tipo_cambio(opcion):
     else:
         moneda = "PER"
         saldo  = conversor_a_per(dinero)
+
+    return moneda, saldo
 
 def conversor_a_per(valor):
     """

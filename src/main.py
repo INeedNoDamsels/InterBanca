@@ -65,25 +65,25 @@ def ingreso():
 
     return menu.inicio(clave, documento)
 
-def generacion_movimientos():
+def generacion_movimientos(bandera):
     """Función que genera 10 movimientos aleatorios."""
     nombres  = ("Depósito     ", "Extracción   ", "Recibo       ", "Transferencia")
 
-    if misc.globales.bandera is False:
-        misc.globales.bandera = True
+    if bandera is False:
+        bandera = True
 
         for _ in range(10):
             i = randint(0, 3)
             j = randint(0, 1)
             if j == 1:
                 valores = (randint(1, 15) * 550) * 1.2   # ARS
-                misc.globales.mov_monedas.append("ARS")
+                mov_monedas.append("ARS")
             else:
                 valores = (randint(1, 15) * 22.05) * 1.2 # PER
-                misc.globales.mov_monedas.append("PER")
+                mov_monedas.append("PER")
 
-            misc.globales.mov_nombres.append(nombres[i])
-            misc.globales.mov_valores.append(round(valores, 2))
+            mov_nombres.append(nombres[i])
+            mov_valores.append(round(valores, 2))
 
 def principal():
     """Función que permite el inicio de tus aventuras con la ATM."""
@@ -91,7 +91,7 @@ def principal():
 
     intentos, usuario_validado = 0, False
 
-    generacion_movimientos()
+    generacion_movimientos(bandera)
 
     while usuario_validado is not True:
         misc.interfaz.head()
@@ -104,4 +104,7 @@ def principal():
     opciones()
 
 if __name__ == "__main__":
+    bandera = False
+    mov_nombres, mov_valores, mov_monedas = [], [], []
+
     principal()

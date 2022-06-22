@@ -1,13 +1,12 @@
 """
 Interfaces y demás extras para simular realismo.
 """
+import sys
 from os import system, name
 try:
-    import main
     from misc.globales import lapso
     from operaciones   import configuracion
 except ImportError:
-    import src.main
     from src.misc.globales import lapso
     from src.operaciones   import configuracion
 
@@ -73,7 +72,4 @@ def final(nro_mensaje):
     head()
     nombre_operacion(6)
     print(f"{mensajes[nro_mensaje]}")
-    lapso() #
-    lapso() # medio feo hacerlo así
-    head()
-    main.principal()
+    sys.exit()
