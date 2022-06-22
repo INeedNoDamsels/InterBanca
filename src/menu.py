@@ -50,7 +50,7 @@ def operacion(opcion, movimientos):
         monto  = main.ingreso_valor(0, saldo, 5, ">> Ingrese el monto a transferir (<0> Salir): $", movimientos)
 
         codigo = operaciones.transferencia(clave, monto, moneda, movimientos)
-    else:
+    elif opcion == 4:
         operaciones.salir()
 
     return codigo

@@ -35,10 +35,9 @@ def ingreso_valor(minimo, maximo, operacion, mensaje, movimientos):
         if valor == 0:
             opciones(movimientos)
     except ValorFueraDeRango:
-        ingreso_valor(minimo, maximo, operacion, mensaje, movimientos)
+        valor = ingreso_valor(minimo, maximo, operacion, mensaje, movimientos)
     except ValueError:
-        valor = None
-        ingreso_valor(minimo, maximo, operacion, mensaje, movimientos)
+        valor = ingreso_valor(minimo, maximo, operacion, mensaje, movimientos)
 
     return valor
 
