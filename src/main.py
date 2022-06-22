@@ -23,7 +23,7 @@ class Error(Exception):
 class ValorFueraDeRango(Error):
     """Cuando se ingresa un valor fuera del rango permitido."""
 
-def ingreso_valor(minimo, maximo, operacion, mensaje):
+def ingreso_valor(minimo, maximo, operacion, mensaje, movimientos):
     """Función que permite el ingreso de un valor en un intervalo definido."""
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(operacion)
@@ -33,19 +33,22 @@ def ingreso_valor(minimo, maximo, operacion, mensaje):
         if not minimo <= valor <= maximo:
             raise ValorFueraDeRango
         if valor == 0:
-            opciones()
+            opciones(movimientos)
     except ValorFueraDeRango:
-        ingreso_valor(minimo, maximo, operacion, mensaje)
+        ingreso_valor(minimo, maximo, operacion, mensaje, movimientos)
+    except ValueError:
+        valor = None
+        ingreso_valor(minimo, maximo, operacion, mensaje, movimientos)
 
     return valor
 
-def opciones():
+def opciones(movimientos):
     """Función que permite al usuario ver y elegir las distintas operaciones disponibles."""
     opcion = ingreso_valor(1, 4, 0, "\t\t\t\t Bienvenido\n\
 \n\t\t  <1> Consulta <2> Retiro <3> Transferencia\n\t\t\t\t  <4> Salir\
-\n\n>> Ingrese número de operación: ")
+\n\n>> Ingrese número de operación: ", movimientos)
 
-    codigo = menu.operacion(opcion)
+    codigo = menu.operacion(opcion, movimientos)
 
     if 2 <= opcion <= 3:
         if 0 < codigo < 3:
@@ -56,17 +59,18 @@ def opciones():
             print("\t\t    Operación fallida, cuenta inexistente")
 
         misc.globales.lapso()
-        opciones()
+        opciones(movimientos)
 
-def ingreso():
+def ingreso(movimientos):
     """Función que solicita el ingreso de los datos del usuario para verificar su identidad."""
-    clave     = ingreso_valor(10000, 99999, 1, ">> Ingrese la clave de seguridad: ")
-    documento = ingreso_valor(10000000, 99999999, 1, ">> Ingrese su nro. de documento : ")
+    clave     = ingreso_valor(10000, 99999, 1, ">> Ingrese la clave de seguridad: ", movimientos)
+    documento = ingreso_valor(10000000, 99999999, 1, ">> Ingrese su nro. de documento : ", movimientos)
 
     return menu.inicio(clave, documento)
 
 def generacion_movimientos(bandera):
     """Función que genera 10 movimientos aleatorios."""
+    mov_nombres, mov_valores, mov_monedas = [], [], []
     nombres  = ("Depósito     ", "Extracción   ", "Recibo       ", "Transferencia")
 
     if bandera is False:
@@ -85,26 +89,27 @@ def generacion_movimientos(bandera):
             mov_nombres.append(nombres[i])
             mov_valores.append(round(valores, 2))
 
+    return (mov_nombres, mov_valores, mov_monedas)
+
 def principal():
     """Función que permite el inicio de tus aventuras con la ATM."""
     misc.interfaz.activacion()
 
+    bandera = False
     intentos, usuario_validado = 0, False
 
-    generacion_movimientos(bandera)
+    movimientos = generacion_movimientos(bandera)
 
     while usuario_validado is not True:
         misc.interfaz.head()
 
         intentos += 1
-        usuario_validado = ingreso()
+        usuario_validado = ingreso(movimientos)
         if intentos == 3:
             misc.interfaz.final(1)
 
-    opciones()
+    opciones(movimientos)
 
 if __name__ == "__main__":
-    bandera = False
-    mov_nombres, mov_valores, mov_monedas = [], [], []
 
     principal()

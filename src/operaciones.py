@@ -27,29 +27,33 @@ def configuracion():
     else:
         configuracion()
 
-def consulta(opcion, moneda, saldo):
+def consulta(opcion, moneda, saldo, movimientos):
     """
     Función que permite la consulta de información de la cuenta.
     """
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(3)
 
+    mov_nombres, mov_valores, mov_monedas = movimientos
+
     if opcion == 1:
         print(f"\t\t\tSaldo disponible: ${saldo} {moneda}")
     elif opcion == 2:
-        for i in range(len(main.mov_nombres)): # cambiar
+        for i in range(len(mov_nombres)):
             print(f"\t\t\t ---------------------------\n\t\t\t\
-  {main.mov_nombres[i]} {main.mov_monedas[i]} ${main.mov_valores[i]}") # cambiar
+  {mov_nombres[i]} {mov_monedas[i]} ${mov_valores[i]}")
 
     misc.interfaz.continuar()
-    main.opciones()
+    main.opciones(movimientos)
 
-def retiro(clave, monto, pregunta, moneda):
+def retiro(clave, monto, pregunta, moneda, movimientos):
     """
     Función que permite el retiro de dinero.
     """
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(4)
+
+    mov_nombres, mov_valores, mov_monedas = movimientos
 
     if (menu.validar_datos(clave, 12345)) is True:
         if pregunta == 1:
@@ -60,29 +64,31 @@ def retiro(clave, monto, pregunta, moneda):
             misc.globales.dinero -= monto # cambiar
         else:
             misc.globales.dinero -= misc.globales.conversor_a_ars(monto) # cambiar
-        main.mov_nombres.append("Extracción   ") # cambiar
-        main.mov_valores.append(round(monto, 2)) # cambiar
-        main.mov_monedas.append(moneda) # cambiar
+        mov_nombres.append("Extracción   ")
+        mov_valores.append(round(monto, 2))
+        mov_monedas.append(moneda)
     else:
         codigo = 0
 
     return codigo
 
-def transferencia(clave, monto, moneda):
+def transferencia(clave, monto, moneda, movimientos):
     """
     Función que permite la transferencia de dinero de una cuente a otra.
     """
     misc.interfaz.head()
     misc.interfaz.nombre_operacion(5)
 
+    mov_nombres, mov_valores, mov_monedas = movimientos
+
     if menu.validar_datos(clave, 98765) is True:
         if moneda == "ARS":
             misc.globales.dinero -= monto # cambiar
         else:
             misc.globales.dinero -= misc.globales.conversor_a_ars(monto) # cambiar
-        main.mov_nombres.append("Transferencia") # cambiar
-        main.mov_valores.append(round(monto, 2)) # cambiar
-        main.mov_monedas.append(moneda) # cambiar
+        mov_nombres.append("Transferencia")
+        mov_valores.append(round(monto, 2))
+        mov_monedas.append(moneda)
         codigo = 1
     else:
         codigo = 0

@@ -8,9 +8,11 @@
 Test correspondientes al archivo 'operaciones'.
 """
 #!/usr/bin/python
-
+from src.main import generacion_movimientos
 from src.operaciones import retiro, transferencia
 from src.misc.globales import tipo_cambio
+
+movimientos = generacion_movimientos(False)
 
 #Testing: Retiro
 def test_retiro_clave_correcta_imprimir_ticket():
@@ -24,7 +26,7 @@ def test_retiro_clave_correcta_imprimir_ticket():
 
     moneda = "ARS"
 
-    resultado=retiro(contra,cantidad,preg, moneda)
+    resultado=retiro(contra,cantidad,preg, moneda, movimientos)
     assert isinstance(resultado,int), "El resultado debe ser un nro"
     assert resultado==2,"No se obtiene el resultado esperado"
 
@@ -37,7 +39,7 @@ def test_retiro_clave_correcta_no_imprimir_ticket():
     cantidad=5000
     preg=2
     moneda="ARS"
-    resultado=retiro(contra,cantidad,preg, moneda)
+    resultado=retiro(contra,cantidad,preg, moneda, movimientos)
     assert isinstance(resultado,int), "El resultado debe ser un nro"
     assert resultado==1,"No se obtiene el resultado esperado"
 
@@ -50,7 +52,7 @@ def test_retiro_clave_incorrecta():
     monto=5000
     pregunta=1
     moneda="ARS"
-    resultado=retiro(clave,monto,pregunta, moneda)
+    resultado=retiro(clave,monto,pregunta, moneda, movimientos)
     assert isinstance(resultado,int), "El resultado debe ser un nro"
     assert resultado==0,"No se obtiene el resultado esperado"
 #testing: trasferencia
@@ -62,7 +64,7 @@ def  test_transferencia_clave_incorrecta():
     clave=123
     monto=15000
     moneda= "ARS"
-    resultado=transferencia(monto,clave,moneda)
+    resultado=transferencia(monto,clave,moneda, movimientos)
     assert isinstance (resultado, int), "el resultado debe ser un nro"
     assert resultado==0,"No se obtiene el resultado esperado"
 def  test_transferencia_clave_correcta_exitosa():
@@ -73,6 +75,6 @@ def  test_transferencia_clave_correcta_exitosa():
     clave=98765
     monto=5000
     moneda="ARS"
-    resultado=transferencia(clave,monto,moneda)
+    resultado=transferencia(clave,monto,moneda, movimientos)
     assert isinstance (resultado,int), "El resultado debe ser un nro"
     assert resultado==1, "no se obtiene el resultado esperado"
